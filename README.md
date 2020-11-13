@@ -10,7 +10,7 @@ This tool is a bit dumber than the OBS Subtitles tool, so in order to get it int
 
 ## Customizing
 
-If you understand basic web development and git, you can skip ahead to `Editing the Code` below after forking, cloning, and `npm install`ing the repo. Use `npm run dev` to get a local version running after install. If the previous sentence doesn't make sense to you, continue to `Setup`. 
+If you understand basic web development and git, you can skip ahead to `Editing the Code` below after forking, cloning, and `npm install`ing the repo. Use `npm run dev` to get a local version running after install. If the previous sentence doesn't make sense to you, continue to `Setup`.
 
 ### Setup
 
@@ -27,7 +27,7 @@ Before you begin, you'll need the following:
 1. [`Node` and `npm` installed](https://nodejs.org/en/)
 1. A code editor. I use [Visual Studio](https://code.visualstudio.com/). I also recommend [following these steps](https://code.visualstudio.com/docs/setup/mac) to make opening code easier. This guide is for VSCode on Mac, but there should be similar guides for whichever code editor you choose on whichever platform.
 
-Once you have these tools installed, you'll need to `fork` and `clone` the repo for Stream CC. Follow the steps in [this guide](https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo#fork-an-example-repository), but replace the `octocat/Spoon-Knife` repo with the [Stream CC repo](https://github.com/tchryssos/stream-cc). Before continuing, make sure that you're inside the Stream CC repo in your terminal and code editor. 
+Once you have these tools installed, you'll need to `fork` and `clone` the repo for Stream CC. Follow the steps in [this guide](https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo#fork-an-example-repository), but replace the `octocat/Spoon-Knife` repo with the [Stream CC repo](https://github.com/tchryssos/stream-cc). Before continuing, make sure that you're inside the Stream CC repo in your terminal and code editor.
 
 With the repo cloned, you're ready to open the code in your editor and continue with the steps for `Setup` and `Running Locally` listed [here](https://github.com/tchryssos/parcel-template#setup). Anytime it says `npm ...` that means you need to type and run that command in the terminal. Don't worry about editing the meta properties listed as step 3 of `Setup` or the `npm run prod` command. You just need to install the dependencies and get something running locally so that you can see the changes you're making as you customize.
 
@@ -44,6 +44,7 @@ There are three main things to customize on Stream CC:
 - Text clear behavior
 
 Before proceeding with customization I'd like to point you to the following two resources on web and media accessibility:
+
 - [Berkeley's A11yHUB](https://onlinelearning.berkeley.edu/courses/433559/pages/captioning-standards-and-best-practices)
 - [WCAG Web Accessibility Guidelines](https://www.w3.org/WAI/standards-guidelines/wcag/)
 
@@ -67,7 +68,7 @@ If you want to maximize the number of lines without defining them specifically, 
 
 By default, captions remain on the screen until pushed off by subsequent speech. It is possible to have the text clear after x amount of time without speaking, but this will require some javascript know-how as I haven't programmed in a way to do this yet myself (so there's no "toggle" you can flip).
 
-Conceptually, you should be able to use a [debounced](https://lodash.com/docs/#debounce) clear function that runs inside `recognition.onResult()` (line 9 in `src/main.js`) to set `text.textContent` to an empty string with a debounce time of however long you want to wait after you've finished speaking. 
+Conceptually, you should be able to use a [debounced](https://lodash.com/docs/#debounce) clear function that runs inside `recognition.onResult()` (line 9 in `src/main.js`) to set `text.textContent` to an empty string with a debounce time of however long you want to wait after you've finished speaking.
 
 ## TODOs
 
