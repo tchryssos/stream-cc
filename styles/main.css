@@ -1,0 +1,45 @@
+html,
+body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	position: relative;
+}
+
+div,
+a {
+	box-sizing: border-box;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin: 0;
+	padding: 0;
+}
+
+#content {
+	display: flex;
+	flex-direction: column;
+	margin-top: 16px;
+}
+
+#textWrapper {
+	font-size: 32px;
+	font-family: sans-serif;
+	line-height: 40px;
+	overflow: scroll;
+	height: 80px;
+	padding: 0 16px;
+}
+
+#textWrapper::-webkit-scrollbar {
+	display: none;
+}

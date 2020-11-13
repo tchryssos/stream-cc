@@ -1,0 +1,25 @@
+{
+  "name": "parcel-template",
+  "version": "1.1.0",
+  "description": "A basic parcel project",
+  "scripts": {
+    "dev": "parcel index.html",
+    "build": "parcel build index.html --public-url ./",
+    "deploy": "rm -rf dist && npm run build && git push origin `git subtree split --prefix dist master`:gh-pages --force"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "alias": {
+    "logic": "./src/logic",
+    "static": "./src/static"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.0",
+    "@babel/plugin-transform-runtime": "^7.11.0",
+    "parcel-bundler": "^1.12.4",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.6.0",
+    "eslint-plugin-import": "^2.22.0"
+  }
+}
