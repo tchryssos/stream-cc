@@ -24,9 +24,9 @@ Before you begin, you'll need the following:
 1. [`Node` and `npm` installed](https://nodejs.org/en/)
 1. A code editor. I use [Visual Studio](https://code.visualstudio.com/). I also recommend [following these steps](https://code.visualstudio.com/docs/setup/mac) to make opening code easier. This guide is for VSCode on Mac, but there should be similar guides for whichever code editor you choose on whichever platform.
 
-Once you have these tools installed, you'll need to `fork` and `clone` the repo for Stream CC. Follow the steps in [this guide](https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo#fork-an-example-repository), but replace the `octocat/Spoon-Knife` repo with the [Stream CC repo](https://github.com/tchryssos/stream-cc). Before continuing, make sure that you're inside the Stream CC repo in your terminal and code editor.
+Once you have these tools installed, you'll need to `fork` and `clone` the repo for Stream CC. Follow the steps in [this guide](https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo#fork-an-example-repository), but replace the `octocat/Spoon-Knife` repo with the [Stream CC repo](https://github.com/tchryssos/stream-cc).
 
-With the repo cloned, you're ready to open the code in your editor and continue with the steps for `Setup` and `Running Locally` listed [here](https://github.com/tchryssos/parcel-template#setup). Anytime it says `npm ...` that means you need to type and run that command in the terminal. Don't worry about editing the meta properties listed as step 3 of `Setup` or the `npm run prod` command. You just need to install the dependencies and get something running locally so that you can see the changes you're making as you customize.
+With the repo cloned, you're ready to open the code in your editor and continue with the steps for `Setup` and `Running Locally` listed [here](https://github.com/tchryssos/parcel-template#setup). Before continuing, make sure that you're inside the Stream CC repo in your terminal and code editor. Anytime it says `npm ...` that means you need to type and run that command in the terminal. Don't worry about editing the meta properties listed as step 3 of `Setup` or the `npm run prod` command. You just need to install the dependencies and get something running locally so that you can see the changes you're making as you customize.
 
 Once you've used the `npm run dev` command, you can find your copy of Stream CC at `localhost:1234` in your browser. Type that into your address bar as if you were going to a regular website and presto! you're running your own copy of Stream CC.
 
@@ -67,8 +67,22 @@ By default, captions remain on the screen until pushed off by subsequent speech.
 
 Conceptually, you should be able to use a [debounced](https://lodash.com/docs/#debounce) clear function that runs inside `recognition.onResult()` (line 9 in `src/main.js`) to set `text.textContent` to an empty string with a debounce time of however long you want to wait after you've finished speaking.
 
+## Deployment (aka how to get your customized version live)
+
+Now that you've made all the changes you want to make, you're ready to deploy your version of Stream CC so that you can use it. Theoretically, you could just run your copy locally every time you want to stream, but that's a way bigger hassle than just having a url you can visit.
+
+We're going to deploy to a github hosted website (which is free!) connected to your github username, so the url will end up being something like `https://your_github_username.github.io/stream-cc/`.
+
+To deploy, you just need to [follow the steps listed here](https://github.com/tchryssos/parcel-template#deploying). Don't worry too much about the ins and outs of this process, you can skip to the `to summarize` section.
+
+Once you've successfully deployed, you can visit your own `stream-cc` url to use your customized version, and any time you want to make additional changes, you can just edit and deploy again.
+
 ## TODOs
 
 - Allow user customization of colors directly in browser rather than by forking the repo and modifying code
 - Show some initial feedback to let users know when they're able to start speaking
 - Investigate modifying Stream CC's i/o so that it is capturable by OBS's `browser` source.
+
+## Feedback
+
+If there's a feature you'd like to see added or a question you have about Stream CC you can [open a github issue here](https://github.com/tchryssos/stream-cc/issues) or [email me here](mailto:troychryssos@gmail.com?subject="Stream%20CC").
