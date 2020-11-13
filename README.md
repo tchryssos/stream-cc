@@ -8,9 +8,20 @@ If you just want to use the tool as is, without customization, open Google Chrom
 
 This tool is a bit dumber than the OBS Subtitles tool, so in order to get it into your stream you're going to capture the Stream CC browser window and feed that into OBS or your streaming tool of choice. Crop it so that it looks nice.
 
+## Table of Contents
+
+1. [Customizing](https://github.com/tchryssos/stream-cc#customizing)
+
+- [Customizing - Setup](https://github.com/tchryssos/stream-cc#setup)
+- [Customizing - Editing](https://github.com/tchryssos/stream-cc#editing-the-code)
+
+1. [Deployment](https://github.com/tchryssos/stream-cc#deployment-aka-how-to-get-your-customized-version-live)
+1. [TODOs](https://github.com/tchryssos/stream-cc#todos)
+1. [Feedback](https://github.com/tchryssos/stream-cc#feedback)
+
 ## Customizing
 
-If you understand basic web development and git, you can skip ahead to `Editing the Code` below after forking, cloning, and `npm install`ing the repo. Use `npm run dev` to get a local version running after install. If the previous sentence doesn't make sense to you, continue to `Setup`.
+If you understand basic web development and git, you can skip ahead to [`Editing the Code`](https://github.com/tchryssos/stream-cc#editing-the-code) below after forking, cloning, and `npm install`ing the repo. Use `npm run dev` to get a local version running after install. If the previous sentence doesn't make sense to you, continue to `Setup`.
 
 ### Setup
 
@@ -36,9 +47,9 @@ Now that you've got Stream CC running locally, you're ready to start customizing
 
 There are three main things to customize on Stream CC:
 
-- Text and background color
-- Font size and lines displayed
-- Text clear behavior
+- [Text and background color](https://github.com/tchryssos/stream-cc#1-text-and-background-color)
+- [Font size and lines displayed](https://github.com/tchryssos/stream-cc#2-font-size-and-lines-displayed)
+- [Text clear behavior](https://github.com/tchryssos/stream-cc#3-text-clear-behavior)
 
 Before proceeding with customization I'd like to point you to the following two resources on web and media accessibility:
 
