@@ -11,10 +11,8 @@ This tool is a bit dumber than the OBS Subtitles tool, so in order to get it int
 ## Table of Contents
 
 1. [Customizing](https://github.com/tchryssos/stream-cc#customizing)
-
-- [Customizing - Setup](https://github.com/tchryssos/stream-cc#setup)
-- [Customizing - Editing](https://github.com/tchryssos/stream-cc#editing-the-code)
-
+  - [Customizing - Setup](https://github.com/tchryssos/stream-cc#setup)
+  - [Customizing - Editing](https://github.com/tchryssos/stream-cc#editing-the-code)
 1. [Deployment](https://github.com/tchryssos/stream-cc#deployment-aka-how-to-get-your-customized-version-live)
 1. [TODOs](https://github.com/tchryssos/stream-cc#todos)
 1. [Feedback](https://github.com/tchryssos/stream-cc#feedback)
