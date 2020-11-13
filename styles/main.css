@@ -34,6 +34,13 @@ h6 {
 	padding-top: 32px;
 }
 
+/*
+	The way text is restricted to two lines is dead simple:
+
+	The height of this container is set to the height of two lines.
+	If you want to change the # of lines before scroll, just change the `height` or
+	`line-height` property. 
+*/
 #textWrapper {
 	font-size: 40px;
 	font-family: Helvetica, sans-serif;
