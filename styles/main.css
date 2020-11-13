@@ -3,6 +3,7 @@ body {
 	height: 100%;
 	margin: 0;
 	padding: 0;
+	background-color: #0d0d0d;
 }
 
 body {
@@ -26,18 +27,21 @@ h6 {
 }
 
 #content {
+	height: 100%;
+	width: 100%;
 	display: flex;
 	flex-direction: column;
-	margin-top: 16px;
+	padding-top: 32px;
 }
 
 #textWrapper {
-	font-size: 32px;
-	font-family: sans-serif;
-	line-height: 40px;
+	font-size: 40px;
+	font-family: Helvetica, sans-serif;
+	line-height: 48px;
 	overflow: scroll;
-	height: 80px;
-	padding: 0 16px;
+	height: 96px;
+	padding: 0 32px;
+	color: #fff;
 }
 
 #textWrapper::-webkit-scrollbar {
