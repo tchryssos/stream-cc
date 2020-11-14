@@ -117,28 +117,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"src/logic/speech.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.recognition = void 0;
-var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-var recognition;
-exports.recognition = recognition;
-
-if (typeof SpeechRecognition === "undefined") {
-  exports.recognition = recognition = {
-    error: 'This browser does not support speech recognition. Please open this app in Google Chrome.'
-  };
-} else {
-  exports.recognition = recognition = new SpeechRecognition();
-}
-
-recognition.continuous = true;
-recognition.interimResults = true;
-},{}],"src/logic/elements.js":[function(require,module,exports) {
+})({"src/logic/elements.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -149,7 +128,48 @@ var text = document.getElementById('text');
 exports.text = text;
 var textWrapper = document.getElementById('textWrapper');
 exports.textWrapper = textWrapper;
-},{}],"src/main.js":[function(require,module,exports) {
+},{}],"src/logic/speech.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.recognition = void 0;
+
+var _elements = require("/src/logic/elements");
+
+var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition || window.oSpeechRecognition;
+var recognition;
+exports.recognition = recognition;
+
+if (typeof SpeechRecognition === 'undefined') {
+  exports.recognition = recognition = {
+    error: 'This browser does not support speech recognition. Please open this app in Google Chrome.'
+  };
+} else {
+  exports.recognition = recognition = new SpeechRecognition();
+} // Recognition config
+
+
+recognition.continuous = true;
+recognition.interimResults = true;
+
+recognition.onresult = function (e) {
+  var resultArray = Array.from(e.results);
+  var string = resultArray.map(function (r) {
+    return r[0].transcript;
+  }).join('');
+  _elements.text.textContent = string;
+
+  _elements.textWrapper.scroll(0, _elements.textWrapper.scrollHeight);
+};
+
+recognition.onend = function () {
+  // Speech Recognition ends every few seconds of inactivity
+  // but we want to keep it alive while the user is on the page
+  recognition.start();
+};
+},{"/src/logic/elements":"src/logic/elements.js"}],"src/main.js":[function(require,module,exports) {
 "use strict";
 
 var _speech = require("/src/logic/speech");
@@ -161,16 +181,6 @@ if (_speech.recognition.error) {
   _elements.text.textContent = _speech.recognition.error;
 } else {
   _speech.recognition.start();
-
-  _speech.recognition.onresult = function (e) {
-    var resultArray = Array.from(e.results);
-    var string = resultArray.map(function (r) {
-      return r[0].transcript;
-    }).join('');
-    _elements.text.textContent = string;
-
-    _elements.textWrapper.scroll(0, _elements.textWrapper.scrollHeight);
-  };
 }
 },{"/src/logic/speech":"src/logic/speech.js","/src/logic/elements":"src/logic/elements.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -200,7 +210,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59241" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57287" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
