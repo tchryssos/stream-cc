@@ -76,6 +76,10 @@ By default, captions remain on the screen until pushed off by subsequent speech.
 
 Conceptually, you should be able to use a [debounced](https://lodash.com/docs/#debounce) clear function that runs inside `recognition.onResult()` (line 9 in `src/main.js`) to set `text.textContent` to an empty string with a debounce time of however long you want to wait after you've finished speaking.
 
+#### After editing
+
+After you've finished making changes, you're going to want to commit those changes to github. Follow the `git add` and `git commit` tutorials [here](https://www.atlassian.com/git/tutorials/saving-changes) to learn about adding and commiting changes.
+
 ## Deployment (aka how to get your customized version live)
 
 Now that you've made all the changes you want to make, you're ready to deploy your version of Stream CC so that you can use it. Theoretically, you could just run your copy locally every time you want to stream, but that's a way bigger hassle than just having a url you can visit.
