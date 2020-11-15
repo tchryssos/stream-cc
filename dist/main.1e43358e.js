@@ -128,7 +128,8 @@ var text = document.getElementById('text');
 exports.text = text;
 var textWrapper = document.getElementById('textWrapper');
 exports.textWrapper = textWrapper;
-var pageSizeWarningText = document.getElementById('pageSizeWarningText');
+var pageSizeWarningText = document.getElementById('pageSizeWarningText'); // START - UTILS - START
+
 exports.pageSizeWarningText = pageSizeWarningText;
 
 var getStyle = function getStyle(element, styleProp) {
@@ -138,7 +139,9 @@ var getStyle = function getStyle(element, styleProp) {
 var getNumericalValue = function getNumericalValue(text) {
   var regex = /\d+/g;
   return parseInt(text.match(regex)[0]);
-};
+}; // END - UTILS - END
+// START - ELEMENTS - START
+
 
 var settingsPannel = document.getElementById('settingsPannel');
 exports.settingsPannel = settingsPannel;
@@ -148,7 +151,8 @@ var settingsIcon = document.getElementById('settingsIcon');
 exports.settingsIcon = settingsIcon;
 var settingsForm = document.getElementById('settingsForm');
 exports.settingsForm = settingsForm;
-var formInputs = Array.from(document.querySelectorAll('.input'));
+var formInputs = Array.from(document.querySelectorAll('.input')); // END - ELEMENTS - END
+
 settingsButton.addEventListener('click', function () {
   var settingsDisplay = getStyle(settingsPannel, 'display');
 
@@ -191,6 +195,24 @@ formInputs.forEach(function (input) {
 
       break;
 
+    case 'fontSize':
+      readValue = getNumericalValue(getStyle(text, 'font-size'));
+
+      onChange = function onChange(e) {
+        var v = Math.round(e.target.value);
+        var height = getNumericalValue(getStyle(textWrapper, 'height'));
+        var lineHeight = getNumericalValue(getStyle(text, 'line-height'));
+        var lineCount = height / lineHeight;
+        var nextLineHeight = Math.round(v + 8);
+        var nextHeight = Math.round(nextLineHeight * lineCount);
+        input.value = v;
+        text.style.fontSize = "".concat(v, "px");
+        text.style.lineHeight = "".concat(nextLineHeight, "px");
+        textWrapper.style.height = "".concat(nextHeight, "px");
+      };
+
+      break;
+
     case 'lineCount':
       {
         var height = getNumericalValue(getStyle(textWrapper, 'height'));
@@ -198,19 +220,17 @@ formInputs.forEach(function (input) {
         readValue = height / lineHeight;
 
         onChange = function onChange(e) {
+          var v = Math.round(e.target.value);
           var fontSize = getNumericalValue(getStyle(text, 'font-size'));
-          var lineHeight = fontSize + 8;
-          var height = lineHeight * e.target.value;
+          var lineHeight = Math.round(fontSize + 8);
+          var height = Math.round(lineHeight * v);
           textWrapper.style.height = "".concat(height, "px");
           text.style.lineHeight = "".concat(lineHeight, "px");
+          input.value = v;
         };
 
         break;
       }
-
-    case 'fontSize':
-      readValue = getNumericalValue(getStyle(text, 'font-size'));
-      break;
 
     default:
       return;

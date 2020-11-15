@@ -4,17 +4,22 @@ export const pageSizeWarningText = document.getElementById(
 	'pageSizeWarningText',
 )
 
-const getStyle = (element, styleProp) => element.style[styleProp] || getComputedStyle(element)[styleProp]
+// START - UTILS - START
+const getStyle = (element, styleProp) =>
+	element.style[styleProp] || getComputedStyle(element)[styleProp]
 const getNumericalValue = (text) => {
 	const regex = /\d+/g
 	return parseInt(text.match(regex)[0])
 }
+// END - UTILS - END
 
+// START - ELEMENTS - START
 export const settingsPannel = document.getElementById('settingsPannel')
 export const settingsButton = document.getElementById('settingsButton')
 export const settingsIcon = document.getElementById('settingsIcon')
 export const settingsForm = document.getElementById('settingsForm')
 const formInputs = Array.from(document.querySelectorAll('.input'))
+// END - ELEMENTS - END
 
 settingsButton.addEventListener('click', () => {
 	const settingsDisplay = getStyle(settingsPannel, 'display')
@@ -28,49 +33,68 @@ settingsButton.addEventListener('click', () => {
 	}
 })
 
-formInputs.forEach(
-	(input) => {
-		const { name } = input
-		let readValue
-		let onChange
-		switch (name) {
-			case 'textColor':
-				readValue = getStyle(text, 'color')
-				onChange = (e) => {
-					const v = e.target.value
-					text.style.color = v
-					formInputs.forEach(i => i.style.color = v)
-					settingsPannel.style.color = v
-				}
-				break
-			case 'backgroundColor':
-				readValue = getStyle(document.body, 'background-color')
-				onChange = (e) => {
-					const v = e.target.value
-					document.body.style.backgroundColor = v
-					document.documentElement.style.backgroundColor = v
-				}
-				break
-			case 'lineCount': {
+formInputs.forEach((input) => {
+	const { name } = input
+	let readValue
+	let onChange
+	switch (name) {
+		case 'textColor':
+			readValue = getStyle(text, 'color')
+
+			onChange = (e) => {
+				const v = e.target.value
+				text.style.color = v
+				formInputs.forEach((i) => (i.style.color = v))
+				settingsPannel.style.color = v
+			}
+			break
+		case 'backgroundColor':
+			readValue = getStyle(document.body, 'background-color')
+
+			onChange = (e) => {
+				const v = e.target.value
+				document.body.style.backgroundColor = v
+				document.documentElement.style.backgroundColor = v
+			}
+			break
+		case 'fontSize':
+			readValue = getNumericalValue(getStyle(text, 'font-size'))
+
+			onChange = (e) => {
+				const v = Math.round(e.target.value)
+
 				const height = getNumericalValue(getStyle(textWrapper, 'height'))
 				const lineHeight = getNumericalValue(getStyle(text, 'line-height'))
-				readValue = height / lineHeight
-				onChange = (e) => {
-					const fontSize = getNumericalValue(getStyle(text, 'font-size'))
-					const lineHeight = fontSize + 8
-					const height = lineHeight * e.target.value
-					textWrapper.style.height = `${height}px`
-					text.style.lineHeight = `${lineHeight}px`
-				}
-				break
+				const lineCount = height / lineHeight
+
+				const nextLineHeight = Math.round(v + 8)
+				const nextHeight = Math.round(nextLineHeight * lineCount)
+
+				input.value = v
+				text.style.fontSize = `${v}px`
+				text.style.lineHeight = `${nextLineHeight}px`
+				textWrapper.style.height = `${nextHeight}px`
 			}
-			case 'fontSize':
-				readValue = getNumericalValue(getStyle(text, 'font-size'))
-				break
-			default:
-				return
+			break
+		case 'lineCount': {
+			const height = getNumericalValue(getStyle(textWrapper, 'height'))
+			const lineHeight = getNumericalValue(getStyle(text, 'line-height'))
+			readValue = height / lineHeight
+
+			onChange = (e) => {
+				const v = Math.round(e.target.value)
+				const fontSize = getNumericalValue(getStyle(text, 'font-size'))
+				const lineHeight = Math.round(fontSize + 8)
+				const height = Math.round(lineHeight * v)
+				textWrapper.style.height = `${height}px`
+				text.style.lineHeight = `${lineHeight}px`
+				input.value = v
+			}
+			break
 		}
-		input.value = readValue
-		input.addEventListener('change', onChange)
+		default:
+			return
 	}
-)
+	input.value = readValue
+	input.addEventListener('change', onChange)
+})
