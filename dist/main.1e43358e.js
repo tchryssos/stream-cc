@@ -137,7 +137,7 @@ var getStyle = function getStyle(element, styleProp) {
 
 var getNumericalValue = function getNumericalValue(text) {
   var regex = /\d+/g;
-  return text.match(regex)[0];
+  return parseInt(text.match(regex)[0]);
 };
 
 var settingsPannel = document.getElementById('settingsPannel');
@@ -149,7 +149,6 @@ exports.settingsIcon = settingsIcon;
 var settingsForm = document.getElementById('settingsForm');
 exports.settingsForm = settingsForm;
 var formInputs = Array.from(document.querySelectorAll('.input'));
-console.log(formInputs);
 settingsButton.addEventListener('click', function () {
   var settingsDisplay = getStyle(settingsPannel, 'display');
 
@@ -164,14 +163,32 @@ settingsButton.addEventListener('click', function () {
 formInputs.forEach(function (input) {
   var name = input.name;
   var readValue;
+  var onChange;
 
   switch (name) {
     case 'textColor':
       readValue = getStyle(text, 'color');
+
+      onChange = function onChange(e) {
+        var v = e.target.value;
+        text.style.color = v;
+        formInputs.forEach(function (i) {
+          return i.style.color = v;
+        });
+        settingsPannel.style.color = v;
+      };
+
       break;
 
     case 'backgroundColor':
       readValue = getStyle(document.body, 'background-color');
+
+      onChange = function onChange(e) {
+        var v = e.target.value;
+        document.body.style.backgroundColor = v;
+        document.documentElement.style.backgroundColor = v;
+      };
+
       break;
 
     case 'lineCount':
@@ -179,6 +196,15 @@ formInputs.forEach(function (input) {
         var height = getNumericalValue(getStyle(textWrapper, 'height'));
         var lineHeight = getNumericalValue(getStyle(text, 'line-height'));
         readValue = height / lineHeight;
+
+        onChange = function onChange(e) {
+          var fontSize = getNumericalValue(getStyle(text, 'font-size'));
+          var lineHeight = fontSize + 8;
+          var height = lineHeight * e.target.value;
+          textWrapper.style.height = "".concat(height, "px");
+          text.style.lineHeight = "".concat(lineHeight, "px");
+        };
+
         break;
       }
 
@@ -191,6 +217,7 @@ formInputs.forEach(function (input) {
   }
 
   input.value = readValue;
+  input.addEventListener('change', onChange);
 });
 },{}],"src/logic/speech.js":[function(require,module,exports) {
 "use strict";
