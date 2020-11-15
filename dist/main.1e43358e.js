@@ -123,11 +123,13 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.textWrapper = exports.text = void 0;
+exports.pageSizeWarningText = exports.textWrapper = exports.text = void 0;
 var text = document.getElementById('text');
 exports.text = text;
 var textWrapper = document.getElementById('textWrapper');
 exports.textWrapper = textWrapper;
+var pageSizeWarningText = document.getElementById('pageSizeWarningText');
+exports.pageSizeWarningText = pageSizeWarningText;
 },{}],"src/logic/speech.js":[function(require,module,exports) {
 "use strict";
 
@@ -179,6 +181,7 @@ var _elements = require("/src/logic/elements");
 if (_speech.recognition.error) {
   console.warn(_speech.recognition.error);
   _elements.text.textContent = _speech.recognition.error;
+  _elements.pageSizeWarningText.textContent = _speech.recognition.error;
 } else {
   _speech.recognition.start();
 }

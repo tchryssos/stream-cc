@@ -36,21 +36,75 @@ h6 {
 	padding-top: 32px;
 }
 
+/* START - TEXT CONTENT - START */
 #textContainer {
 	border: 1px dashed #474747;
 	padding: 16px;
 	margin: 0 16px;
 }
 
-#textWrapper {
+.mainText {
 	font-size: 40px;
 	font-family: Helvetica, sans-serif;
 	line-height: 48px;
+	color: #fff;
+}
+
+#textWrapper {
 	overflow: scroll;
 	height: 96px;
-	color: #fff;
 }
 
 #textWrapper::-webkit-scrollbar {
 	display: none;
+}
+
+#pageSizeWarning {
+	display: none;
+	padding: 16px;
+}
+/* END - TEXT CONTENT - END */
+
+/* START - MENU - START */
+#menu {
+	padding: 16px;
+}
+
+#iconRow {
+	display: flex;
+}
+
+.icon {
+	height: 40px;
+	width: 40px;
+	fill: #fff;
+}
+
+#check {
+	fill: #05ab50;
+}
+
+@keyframes statusPulse {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0.7;
+	}
+}
+.statusIcon {
+	animation: statusPulse 0.7s infinite alternate linear;
+}
+/* END - MENU - END */
+
+@media only screen and (max-width: 599px) {
+	#pageSizeWarning {
+		display: block;
+	}
+	#textContainer {
+		display: none;
+	}
+	#menu {
+		display: none;
+	}
 }
