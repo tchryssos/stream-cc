@@ -66,9 +66,14 @@ h6 {
 	display: none;
 }
 
-#pageSizeWarning {
+#warningWrapper {
 	display: none;
 	padding: 16px;
+	color: #de5340;
+}
+
+#errorText {
+	margin-bottom: 16px;
 }
 /* END - TEXT CONTENT - END */
 
@@ -106,6 +111,11 @@ h6 {
 
 #checkIcon {
 	fill: #05ab50;
+}
+
+#xIcon {
+	fill: #de5340;
+	display: none;
 }
 
 @keyframes statusPulse {
@@ -153,7 +163,7 @@ label {
 /* END - SETTINGS - END */
 
 @media only screen and (max-width: 599px) {
-	#pageSizeWarning {
+	#warningWrapper {
 		display: block;
 	}
 	#textContainer {

@@ -1,8 +1,20 @@
+// START - ELEMENTS - START
+const formInputs = Array.from(document.querySelectorAll('.input'))
 export const text = document.getElementById('text')
 export const textWrapper = document.getElementById('textWrapper')
-export const pageSizeWarningText = document.getElementById(
-	'pageSizeWarningText',
-)
+export const textContainer = document.getElementById('textContainer')
+
+export const warningWrapper = document.getElementById('warningWrapper')
+export const warningText = document.getElementById('warningText')
+
+export const settingsPannel = document.getElementById('settingsPannel')
+export const settingsButton = document.getElementById('settingsButton')
+export const settingsIcon = document.getElementById('settingsIcon')
+export const settingsForm = document.getElementById('settingsForm')
+
+export const xIcon = document.getElementById('xIcon')
+export const checkIcon = document.getElementById('checkIcon')
+// END - ELEMENTS - END
 
 // START - UTILS - START
 const getStyle = (element, styleProp) =>
@@ -12,14 +24,6 @@ const getNumericalValue = (text) => {
 	return parseInt(text.match(regex)[0])
 }
 // END - UTILS - END
-
-// START - ELEMENTS - START
-export const settingsPannel = document.getElementById('settingsPannel')
-export const settingsButton = document.getElementById('settingsButton')
-export const settingsIcon = document.getElementById('settingsIcon')
-export const settingsForm = document.getElementById('settingsForm')
-const formInputs = Array.from(document.querySelectorAll('.input'))
-// END - ELEMENTS - END
 
 settingsButton.addEventListener('click', () => {
 	const settingsDisplay = getStyle(settingsPannel, 'display')
