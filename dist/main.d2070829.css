@@ -43,11 +43,18 @@ h6 {
 	margin: 0 16px;
 }
 
-.mainText {
-	font-size: 40px;
-	font-family: Helvetica, sans-serif;
-	line-height: 48px;
+.text {
 	color: #fff;
+	font-family: Helvetica, sans-serif;
+}
+
+.bigText {
+	font-size: 40px;
+	line-height: 48px;
+}
+
+.bodyText {
+	font-size: 16px;
 }
 
 #textWrapper {
@@ -68,19 +75,36 @@ h6 {
 /* START - MENU - START */
 #menu {
 	padding: 16px;
+	display: flex;
+	justify-content: space-between;
 }
 
-#iconRow {
+.button {
+	cursor: pointer;
+	padding: 0;
+	margin: 0;
+}
+
+.invisibleButton {
+	background-color: transparent;
+	outline: none;
+	border: none;
+}
+
+#statusIcons {
 	display: flex;
+	align-items: center;
+	justify-content: flex-end;
 }
 
 .icon {
-	height: 40px;
-	width: 40px;
+	height: 24px;
+	width: 24px;
 	fill: #fff;
+	opacity: 0.7;
 }
 
-#check {
+#checkIcon {
 	fill: #05ab50;
 }
 
@@ -93,9 +117,38 @@ h6 {
 	}
 }
 .statusIcon {
-	animation: statusPulse 0.7s infinite alternate linear;
+	animation: statusPulse 0.8s infinite alternate linear;
 }
 /* END - MENU - END */
+
+/* START - SETTINGS - START */
+#settingsPannel {
+	display: flex;
+	flex-direction: column;
+	padding: 16px;
+	padding-top: 0;
+}
+
+#settingsForm {
+	display: flex;
+	flex-direction: column;
+}
+
+label {
+	margin-bottom: 4px;
+}
+
+.input {
+	width: 50%;
+	height: 24px;
+	background-color: transparent;
+	border: 1px solid #474747;
+	border-radius: 4px;
+	padding: 4px;
+	color: #fff;
+	margin-bottom: 8px;
+}
+/* END - SETTINGS - END */
 
 @media only screen and (max-width: 599px) {
 	#pageSizeWarning {
@@ -105,6 +158,9 @@ h6 {
 		display: none;
 	}
 	#menu {
+		display: none;
+	}
+	#settingsPannel {
 		display: none;
 	}
 }
