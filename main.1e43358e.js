@@ -135,6 +135,11 @@ var getStyle = function getStyle(element, styleProp) {
   return element.style[styleProp] || getComputedStyle(element)[styleProp];
 };
 
+var getNumericalValue = function getNumericalValue(text) {
+  var regex = /\d+/g;
+  return text.match(regex)[0];
+};
+
 var settingsPannel = document.getElementById('settingsPannel');
 exports.settingsPannel = settingsPannel;
 var settingsButton = document.getElementById('settingsButton');
@@ -171,12 +176,15 @@ formInputs.forEach(function (input) {
 
     case 'lineCount':
       {
-        var regex = /\d+/g;
-        var height = getStyle(textWrapper, 'height').match(regex)[0];
-        var lineHeight = getStyle(text, 'line-height').match(regex)[0];
+        var height = getNumericalValue(getStyle(textWrapper, 'height'));
+        var lineHeight = getNumericalValue(getStyle(text, 'line-height'));
         readValue = height / lineHeight;
         break;
       }
+
+    case 'fontSize':
+      readValue = getNumericalValue(getStyle(text, 'font-size'));
+      break;
 
     default:
       return;
