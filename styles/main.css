@@ -1,5 +1,4 @@
-/* IMPORTANT! If you update this file, make sure you update the README line numbers */
-
+/* START - BASE ELEMENTS - START */
 html,
 body {
 	height: 100%;
@@ -28,6 +27,12 @@ h6 {
 	padding: 0;
 }
 
+label {
+	margin-bottom: 4px;
+}
+/* END - BASE ELEMENTS - END */
+
+/* START - TOP LEVEL - START */
 #content {
 	height: 100%;
 	width: 100%;
@@ -43,6 +48,7 @@ h6 {
 	align-items: center;
 	justify-content: space-between;
 }
+/* END - TOP LEVEL - END */
 
 /* START - TEXT CONTENT - START */
 #textContainer {
@@ -154,10 +160,6 @@ h6 {
 	flex-direction: column;
 }
 
-label {
-	margin-bottom: 4px;
-}
-
 .input {
 	width: 75%;
 	max-width: 440px;
@@ -171,6 +173,7 @@ label {
 }
 /* END - SETTINGS - END */
 
+/* START - MEDIA QUERIES - START */
 @media only screen and (max-width: 599px) {
 	#warningWrapper {
 		display: block;
@@ -185,3 +188,4 @@ label {
 		display: none;
 	}
 }
+/* END - MEDIA QUERIES - END */
