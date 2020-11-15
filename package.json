@@ -4,9 +4,9 @@
   "description": "A lightweight, browser-based streaming tool for automatic closed captioning using the SpeechRecognition API",
   "scripts": {
     "dev": "parcel index.html",
-    "build": "parcel build index.html --public-url ./",
+    "build": "rm -rf dist && parcel build index.html --public-url ./",
     "prod": "npm run build && npx http-server dist -p 1235 --proxy http://localhost:1235?",
-    "deploy": "rm -rf dist && npm run build && git push origin `git subtree split --prefix dist main`:gh-pages --force",
+    "deploy": "npm run build && git push origin `git subtree split --prefix dist main`:gh-pages --force",
     "deploy:only_first": "rm -rf node_modules && npm install && git checkout -b gh-pages && git push --set-upstream origin gh-pages && npm run deploy && git checkout main"
   },
   "keywords": [],
