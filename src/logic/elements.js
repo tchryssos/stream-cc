@@ -12,8 +12,8 @@ export const settingsButton = document.getElementById('settingsButton')
 export const settingsIcon = document.getElementById('settingsIcon')
 export const settingsForm = document.getElementById('settingsForm')
 
-export const xIcon = document.getElementById('xIcon')
-export const checkIcon = document.getElementById('checkIcon')
+export const xIcon = document.querySelector('.xIcon')
+export const checkIcon = document.querySelector('.checkIcon')
 // END - ELEMENTS - END
 
 // START - UTILS - START
