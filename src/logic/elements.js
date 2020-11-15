@@ -5,6 +5,10 @@ export const pageSizeWarningText = document.getElementById(
 )
 
 const getStyle = (element, styleProp) => element.style[styleProp] || getComputedStyle(element)[styleProp]
+const getNumericalValue = (text) => {
+	const regex = /\d+/g
+	return text.match(regex)[0]
+}
 
 export const settingsPannel = document.getElementById('settingsPannel')
 export const settingsButton = document.getElementById('settingsButton')
@@ -37,12 +41,14 @@ formInputs.forEach(
 				readValue = getStyle(document.body, 'background-color')
 				break
 			case 'lineCount': {
-				const regex = /\d+/g
-				const height = getStyle(textWrapper, 'height').match(regex)[0]
-				const lineHeight = getStyle(text, 'line-height').match(regex)[0]
+				const height = getNumericalValue(getStyle(textWrapper, 'height'))
+				const lineHeight = getNumericalValue(getStyle(text, 'line-height'))
 				readValue = height / lineHeight
 				break
 			}
+			case 'fontSize':
+				readValue = getNumericalValue(getStyle(text, 'font-size'))
+				break
 			default:
 				return
 		}
