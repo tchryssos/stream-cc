@@ -19,11 +19,19 @@ const SpeechRecognition =
 export let recognition
 let autorestart = true
 
+const setErrorState = (allowRestart) => {
+	autorestart = !!allowRestart
+	xIcon.style.display = 'block'
+	checkIcon.style.display = 'none'
+	textContainer.style.display = 'none'
+	settingsButton.style.display = 'none'
+	warningWrapper.style.display = 'block'
+}
+
 if (typeof SpeechRecognition === 'undefined') {
-	recognition = {
-		error:
-			'This browser does not support speech recognition. Please open this app in Google Chrome.',
-	}
+	recognition = { start: () => {} }
+	setErrorState()
+	warningText.textContent = 'This browser does not support the Speech Recognition API. Please switch to Google Chrome and try again.'
 } else {
 	recognition = new SpeechRecognition()
 }
@@ -48,14 +56,6 @@ recognition.onend = () => {
 	}
 }
 
-const setErrorState = () => {
-	autorestart = false
-	xIcon.style.display = 'block'
-	checkIcon.style.display = 'none'
-	textContainer.style.display = 'none'
-	settingsButton.style.display = 'none'
-	warningWrapper.style.display = 'block'
-}
 recognition.onerror = (e) => {
 	switch (e.error) {
 		case 'no-speech':
@@ -63,7 +63,14 @@ recognition.onerror = (e) => {
 		case 'not-allowed':
 		case 'service-not-allowed':
 			setErrorState()
-			warningText.textContent = 'Stream CC needs permission to access your microphone. Please enable microphone access and reload this page.'
+			warningText.textContent =
+				'Stream CC needs permission to access your microphone. Please enable microphone access and reload this page.'
+			break
+		case 'network':
+			// @TODO Networking error should lead to a reconnect once network connection is detected
+			setErrorState()
+			warningText.textContent =
+				'Stream CC cannot connect to the internet. Please check your connection and reload the page.'
 			break
 		default:
 			setErrorState()

@@ -264,10 +264,21 @@ var recognition;
 exports.recognition = recognition;
 var autorestart = true;
 
+var setErrorState = function setErrorState(allowRestart) {
+  autorestart = !!allowRestart;
+  _elements2.xIcon.style.display = 'block';
+  _elements2.checkIcon.style.display = 'none';
+  _elements2.textContainer.style.display = 'none';
+  _elements2.settingsButton.style.display = 'none';
+  _elements2.warningWrapper.style.display = 'block';
+};
+
 if (typeof SpeechRecognition === 'undefined') {
   exports.recognition = recognition = {
-    error: 'This browser does not support speech recognition. Please open this app in Google Chrome.'
+    start: function start() {}
   };
+  setErrorState();
+  _elements.warningText.textContent = 'This browser does not support the Speech Recognition API. Please switch to Google Chrome and try again.';
 } else {
   exports.recognition = recognition = new SpeechRecognition();
 } // Recognition config
@@ -294,15 +305,6 @@ recognition.onend = function () {
   }
 };
 
-var setErrorState = function setErrorState() {
-  autorestart = false;
-  _elements2.xIcon.style.display = 'block';
-  _elements2.checkIcon.style.display = 'none';
-  _elements2.textContainer.style.display = 'none';
-  _elements2.settingsButton.style.display = 'none';
-  _elements2.warningWrapper.style.display = 'block';
-};
-
 recognition.onerror = function (e) {
   switch (e.error) {
     case 'no-speech':
@@ -312,6 +314,12 @@ recognition.onerror = function (e) {
     case 'service-not-allowed':
       setErrorState();
       _elements.warningText.textContent = 'Stream CC needs permission to access your microphone. Please enable microphone access and reload this page.';
+      break;
+
+    case 'network':
+      // @TODO Networking error should lead to a reconnect once network connection is detected
+      setErrorState();
+      _elements.warningText.textContent = 'Stream CC cannot connect to the internet. Please check your connection and reload the page.';
       break;
 
     default:
@@ -324,15 +332,8 @@ recognition.onerror = function (e) {
 
 var _speech = require("/src/logic/speech");
 
-var _elements = require("/src/logic/elements");
-
-if (_speech.recognition.error) {
-  console.warn(_speech.recognition.error);
-  _elements.warningText.textContent = _speech.recognition.error;
-} else {
-  _speech.recognition.start();
-}
-},{"/src/logic/speech":"src/logic/speech.js","/src/logic/elements":"src/logic/elements.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+_speech.recognition.start();
+},{"/src/logic/speech":"src/logic/speech.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
