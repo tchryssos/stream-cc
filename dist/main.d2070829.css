@@ -127,6 +127,7 @@ h6 {
 	flex-direction: column;
 	padding: 16px;
 	padding-top: 0;
+	display: none;
 }
 
 #settingsForm {

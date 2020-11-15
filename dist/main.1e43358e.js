@@ -123,13 +123,30 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.pageSizeWarningText = exports.textWrapper = exports.text = void 0;
+exports.settingsIcon = exports.settingsButton = exports.settingsPannel = exports.pageSizeWarningText = exports.textWrapper = exports.text = void 0;
 var text = document.getElementById('text');
 exports.text = text;
 var textWrapper = document.getElementById('textWrapper');
 exports.textWrapper = textWrapper;
 var pageSizeWarningText = document.getElementById('pageSizeWarningText');
 exports.pageSizeWarningText = pageSizeWarningText;
+var settingsPannel = document.getElementById('settingsPannel');
+exports.settingsPannel = settingsPannel;
+var settingsButton = document.getElementById('settingsButton');
+exports.settingsButton = settingsButton;
+var settingsIcon = document.getElementById('settingsIcon');
+exports.settingsIcon = settingsIcon;
+settingsButton.addEventListener('click', function () {
+  var settingsDisplay = settingsPannel.style.display || getComputedStyle(settingsPannel).display;
+
+  if (settingsDisplay === 'none') {
+    settingsPannel.style.display = 'block';
+    settingsIcon.style.opacity = 1;
+  } else {
+    settingsPannel.style.display = 'none';
+    settingsIcon.style.opacity = 0.7;
+  }
+});
 },{}],"src/logic/speech.js":[function(require,module,exports) {
 "use strict";
 
