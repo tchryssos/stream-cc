@@ -159,6 +159,7 @@ var getNumericalValue = function getNumericalValue(text) {
   var regex = /\d+/g;
   return parseInt(text.match(regex)[0]);
 }; // END - UTILS - END
+// START - EVENT LISTENERS - START
 
 
 settingsButton.addEventListener('click', function () {
@@ -246,7 +247,7 @@ formInputs.forEach(function (input) {
 
   input.value = readValue;
   input.addEventListener('change', onChange);
-});
+}); // END - EVENT LISTENERS - END
 },{}],"src/logic/speech.js":[function(require,module,exports) {
 "use strict";
 
@@ -259,6 +260,7 @@ var _elements = require("./elements");
 
 var _elements2 = require("/src/logic/elements");
 
+// START - SPEECH RECOG SETUP - START
 var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition || window.oSpeechRecognition;
 var recognition;
 exports.recognition = recognition;
@@ -282,7 +284,8 @@ if (typeof SpeechRecognition === 'undefined') {
   _elements.warningText.textContent = 'This browser does not support the Speech Recognition API. Please switch to Google Chrome and try again.';
 } else {
   exports.recognition = recognition = new SpeechRecognition();
-} // Recognition config
+} // END - SPEECH RECOG SETUP- END
+// START - SPEECH RECOG CONIG - START
 
 
 recognition.continuous = true;
@@ -326,7 +329,7 @@ recognition.onerror = function (e) {
     default:
       console.warn("".concat(e.error, ". You can report this error with reproduction steps to https://github.com/tchryssos/stream-cc/issues"));
   }
-};
+}; // END - SPEECH RECOG CONFIG - END
 },{"./elements":"src/logic/elements.js","/src/logic/elements":"src/logic/elements.js"}],"src/main.js":[function(require,module,exports) {
 "use strict";
 
