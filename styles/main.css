@@ -35,9 +35,13 @@ h6 {
 	flex-direction: column;
 }
 
-#title {
+#titleBar {
 	padding: 16px;
 	font-style: italic;
+	display: flex;
+	color: rgba(255, 255, 255, 0.6);
+	align-items: center;
+	justify-content: space-between;
 }
 
 /* START - TEXT CONTENT - START */
@@ -48,7 +52,7 @@ h6 {
 }
 
 .text {
-	color: rgba(255, 255, 255, 0.6);
+	color: #fff;
 	font-family: Helvetica, sans-serif;
 }
 

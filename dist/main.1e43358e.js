@@ -271,6 +271,7 @@ var setErrorState = function setErrorState(allowRestart) {
   _elements2.textContainer.style.display = 'none';
   _elements2.settingsButton.style.display = 'none';
   _elements2.warningWrapper.style.display = 'block';
+  _elements2.settingsPannel.style.display = 'none';
 };
 
 if (typeof SpeechRecognition === 'undefined') {
@@ -323,8 +324,7 @@ recognition.onerror = function (e) {
       break;
 
     default:
-      setErrorState();
-      _elements.warningText.textContent = e.error;
+      console.warn("".concat(e.error, ". You can report this error with reproduction steps to https://github.com/tchryssos/stream-cc/issues"));
   }
 };
 },{"./elements":"src/logic/elements.js","/src/logic/elements":"src/logic/elements.js"}],"src/main.js":[function(require,module,exports) {

@@ -7,6 +7,7 @@ import {
 	checkIcon,
 	warningWrapper,
 	settingsButton,
+	settingsPannel,
 } from '/src/logic/elements'
 
 const SpeechRecognition =
@@ -26,12 +27,14 @@ const setErrorState = (allowRestart) => {
 	textContainer.style.display = 'none'
 	settingsButton.style.display = 'none'
 	warningWrapper.style.display = 'block'
+	settingsPannel.style.display = 'none'
 }
 
 if (typeof SpeechRecognition === 'undefined') {
 	recognition = { start: () => {} }
 	setErrorState()
-	warningText.textContent = 'This browser does not support the Speech Recognition API. Please switch to Google Chrome and try again.'
+	warningText.textContent =
+		'This browser does not support the Speech Recognition API. Please switch to Google Chrome and try again.'
 } else {
 	recognition = new SpeechRecognition()
 }
@@ -73,7 +76,6 @@ recognition.onerror = (e) => {
 				'Stream CC cannot connect to the internet. Please check your connection and reload the page.'
 			break
 		default:
-			setErrorState()
-			warningText.textContent = e.error
+			console.warn(`${e.error}. You can report this error with reproduction steps to https://github.com/tchryssos/stream-cc/issues`)
 	}
 }
