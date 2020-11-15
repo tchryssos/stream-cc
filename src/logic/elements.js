@@ -19,12 +19,14 @@ export const checkIcon = document.getElementById('checkIcon')
 // START - UTILS - START
 const getStyle = (element, styleProp) =>
 	element.style[styleProp] || getComputedStyle(element)[styleProp]
+
 const getNumericalValue = (text) => {
 	const regex = /\d+/g
 	return parseInt(text.match(regex)[0])
 }
 // END - UTILS - END
 
+// START - EVENT LISTENERS - START
 settingsButton.addEventListener('click', () => {
 	const settingsDisplay = getStyle(settingsPannel, 'display')
 
@@ -102,3 +104,4 @@ formInputs.forEach((input) => {
 	input.value = readValue
 	input.addEventListener('change', onChange)
 })
+// END - EVENT LISTENERS - END

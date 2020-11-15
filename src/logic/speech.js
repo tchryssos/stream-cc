@@ -10,6 +10,7 @@ import {
 	settingsPannel,
 } from '/src/logic/elements'
 
+// START - SPEECH RECOG SETUP - START
 const SpeechRecognition =
 	window.SpeechRecognition ||
 	window.webkitSpeechRecognition ||
@@ -38,8 +39,9 @@ if (typeof SpeechRecognition === 'undefined') {
 } else {
 	recognition = new SpeechRecognition()
 }
+// END - SPEECH RECOG SETUP- END
 
-// Recognition config
+// START - SPEECH RECOG CONIG - START
 recognition.continuous = true
 
 recognition.interimResults = true
@@ -79,3 +81,4 @@ recognition.onerror = (e) => {
 			console.warn(`${e.error}. You can report this error with reproduction steps to https://github.com/tchryssos/stream-cc/issues`)
 	}
 }
+// END - SPEECH RECOG CONFIG - END
