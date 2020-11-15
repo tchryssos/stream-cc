@@ -33,7 +33,11 @@ h6 {
 	width: 100%;
 	display: flex;
 	flex-direction: column;
-	padding-top: 32px;
+}
+
+#title {
+	padding: 16px;
+	font-style: italic;
 }
 
 /* START - TEXT CONTENT - START */
@@ -44,7 +48,7 @@ h6 {
 }
 
 .text {
-	color: #fff;
+	color: rgba(255, 255, 255, 0.6);
 	font-family: Helvetica, sans-serif;
 }
 
@@ -69,6 +73,7 @@ h6 {
 #warningWrapper {
 	display: none;
 	padding: 16px;
+	padding-top: 0;
 	color: #de5340;
 }
 
