@@ -123,21 +123,30 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.settingsIcon = exports.settingsButton = exports.settingsPannel = exports.pageSizeWarningText = exports.textWrapper = exports.text = void 0;
+exports.settingsForm = exports.settingsIcon = exports.settingsButton = exports.settingsPannel = exports.pageSizeWarningText = exports.textWrapper = exports.text = void 0;
 var text = document.getElementById('text');
 exports.text = text;
 var textWrapper = document.getElementById('textWrapper');
 exports.textWrapper = textWrapper;
 var pageSizeWarningText = document.getElementById('pageSizeWarningText');
 exports.pageSizeWarningText = pageSizeWarningText;
+
+var getStyle = function getStyle(element, styleProp) {
+  return element.style[styleProp] || getComputedStyle(element)[styleProp];
+};
+
 var settingsPannel = document.getElementById('settingsPannel');
 exports.settingsPannel = settingsPannel;
 var settingsButton = document.getElementById('settingsButton');
 exports.settingsButton = settingsButton;
 var settingsIcon = document.getElementById('settingsIcon');
 exports.settingsIcon = settingsIcon;
+var settingsForm = document.getElementById('settingsForm');
+exports.settingsForm = settingsForm;
+var formInputs = Array.from(document.querySelectorAll('.input'));
+console.log(formInputs);
 settingsButton.addEventListener('click', function () {
-  var settingsDisplay = settingsPannel.style.display || getComputedStyle(settingsPannel).display;
+  var settingsDisplay = getStyle(settingsPannel, 'display');
 
   if (settingsDisplay === 'none') {
     settingsPannel.style.display = 'block';
@@ -146,6 +155,34 @@ settingsButton.addEventListener('click', function () {
     settingsPannel.style.display = 'none';
     settingsIcon.style.opacity = 0.7;
   }
+});
+formInputs.forEach(function (input) {
+  var name = input.name;
+  var readValue;
+
+  switch (name) {
+    case 'textColor':
+      readValue = getStyle(text, 'color');
+      break;
+
+    case 'backgroundColor':
+      readValue = getStyle(document.body, 'background-color');
+      break;
+
+    case 'lineCount':
+      {
+        var regex = /\d+/g;
+        var height = getStyle(textWrapper, 'height').match(regex)[0];
+        var lineHeight = getStyle(text, 'line-height').match(regex)[0];
+        readValue = height / lineHeight;
+        break;
+      }
+
+    default:
+      return;
+  }
+
+  input.value = readValue;
 });
 },{}],"src/logic/speech.js":[function(require,module,exports) {
 "use strict";

@@ -30,7 +30,7 @@ Before you begin, you'll need the following:
 1. A [github account](https://github.com/)
 1. Access to your computer's terminal: [MacOS Terminal](https://support.apple.com/guide/terminal/open-or-quit-terminal-apd5265185d-f365-44cb-8b09-71a064a42125/mac), [Windows Terminal](https://docs.microsoft.com/en-us/windows/terminal/get-started), [Linux Terminal (Ubuntu in this example, but this should apply everywhere)](https://ubuntu.com/tutorials/command-line-for-beginners#1-overview)
 1. [Git installed](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
-1. [`Node` and `npm` installed](https://nodejs.org/en/)
+1. [`Node` and `npm` installed](https://nodejs.org/en/) (`npm` is included with `Node`)
 1. A code editor. I use [Visual Studio](https://code.visualstudio.com/). I also recommend [following these steps](https://code.visualstudio.com/docs/setup/mac) to make opening code easier. This guide is for VSCode on Mac, but there should be similar guides for whichever code editor you choose on whichever platform.
 
 Once you have these tools installed, you'll need to `fork` and `clone` the repo for Stream CC. Follow the steps in [this guide](https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo#fork-an-example-repository), but replace the `octocat/Spoon-Knife` repo with the [Stream CC repo](https://github.com/tchryssos/stream-cc).
