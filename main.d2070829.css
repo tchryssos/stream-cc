@@ -38,7 +38,7 @@ h6 {
 
 /* START - TEXT CONTENT - START */
 #textContainer {
-	border: 1px dashed #474747;
+	border: 1px dashed rgba(255, 255, 255, 0.6);
 	padding: 16px;
 	margin: 0 16px;
 }
@@ -100,7 +100,7 @@ h6 {
 .icon {
 	height: 24px;
 	width: 24px;
-	fill: #fff;
+	fill: rgba(255, 255, 255, 0.6);
 	opacity: 0.7;
 }
 
@@ -140,10 +140,11 @@ label {
 }
 
 .input {
-	width: 50%;
+	width: 75%;
+	max-width: 440px;
 	height: 24px;
 	background-color: transparent;
-	border: 1px solid #474747;
+	border: 1px solid rgba(255, 255, 255, 0.6);
 	border-radius: 4px;
 	padding: 4px;
 	color: #fff;
