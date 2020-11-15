@@ -93,7 +93,9 @@ Once you've successfully deployed, you can visit your own `stream-cc` url to use
 ## TODOs
 
 - Allow user customization of colors directly in browser rather than by forking the repo and modifying code
-- Show some initial feedback to let users know when they're able to start speaking
+- Show some initial feedback to let users know when they're able to start speaking, as well as some help text in case captions fail to appear
+- Show some kind of indication for where the text will appear so that users can crop to that border
+- Allow text clearing after a timeout (i.e. if I stop speaking for 5 seconds, my captions clear)
 - Investigate modifying Stream CC's i/o so that it is capturable by OBS's `browser` source.
 
 ## Feedback
