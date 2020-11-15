@@ -123,14 +123,33 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.settingsForm = exports.settingsIcon = exports.settingsButton = exports.settingsPannel = exports.pageSizeWarningText = exports.textWrapper = exports.text = void 0;
+exports.checkIcon = exports.xIcon = exports.settingsForm = exports.settingsIcon = exports.settingsButton = exports.settingsPannel = exports.warningText = exports.warningWrapper = exports.textContainer = exports.textWrapper = exports.text = void 0;
+// START - ELEMENTS - START
+var formInputs = Array.from(document.querySelectorAll('.input'));
 var text = document.getElementById('text');
 exports.text = text;
 var textWrapper = document.getElementById('textWrapper');
 exports.textWrapper = textWrapper;
-var pageSizeWarningText = document.getElementById('pageSizeWarningText'); // START - UTILS - START
+var textContainer = document.getElementById('textContainer');
+exports.textContainer = textContainer;
+var warningWrapper = document.getElementById('warningWrapper');
+exports.warningWrapper = warningWrapper;
+var warningText = document.getElementById('warningText');
+exports.warningText = warningText;
+var settingsPannel = document.getElementById('settingsPannel');
+exports.settingsPannel = settingsPannel;
+var settingsButton = document.getElementById('settingsButton');
+exports.settingsButton = settingsButton;
+var settingsIcon = document.getElementById('settingsIcon');
+exports.settingsIcon = settingsIcon;
+var settingsForm = document.getElementById('settingsForm');
+exports.settingsForm = settingsForm;
+var xIcon = document.getElementById('xIcon');
+exports.xIcon = xIcon;
+var checkIcon = document.getElementById('checkIcon'); // END - ELEMENTS - END
+// START - UTILS - START
 
-exports.pageSizeWarningText = pageSizeWarningText;
+exports.checkIcon = checkIcon;
 
 var getStyle = function getStyle(element, styleProp) {
   return element.style[styleProp] || getComputedStyle(element)[styleProp];
@@ -140,18 +159,7 @@ var getNumericalValue = function getNumericalValue(text) {
   var regex = /\d+/g;
   return parseInt(text.match(regex)[0]);
 }; // END - UTILS - END
-// START - ELEMENTS - START
 
-
-var settingsPannel = document.getElementById('settingsPannel');
-exports.settingsPannel = settingsPannel;
-var settingsButton = document.getElementById('settingsButton');
-exports.settingsButton = settingsButton;
-var settingsIcon = document.getElementById('settingsIcon');
-exports.settingsIcon = settingsIcon;
-var settingsForm = document.getElementById('settingsForm');
-exports.settingsForm = settingsForm;
-var formInputs = Array.from(document.querySelectorAll('.input')); // END - ELEMENTS - END
 
 settingsButton.addEventListener('click', function () {
   var settingsDisplay = getStyle(settingsPannel, 'display');
@@ -247,11 +255,14 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.recognition = void 0;
 
-var _elements = require("/src/logic/elements");
+var _elements = require("./elements");
+
+var _elements2 = require("/src/logic/elements");
 
 var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition || window.oSpeechRecognition;
 var recognition;
 exports.recognition = recognition;
+var autorestart = true;
 
 if (typeof SpeechRecognition === 'undefined') {
   exports.recognition = recognition = {
@@ -270,17 +281,45 @@ recognition.onresult = function (e) {
   var string = resultArray.map(function (r) {
     return r[0].transcript;
   }).join('');
-  _elements.text.textContent = string;
+  _elements2.text.textContent = string;
 
-  _elements.textWrapper.scroll(0, _elements.textWrapper.scrollHeight);
+  _elements2.textWrapper.scroll(0, _elements2.textWrapper.scrollHeight);
 };
 
 recognition.onend = function () {
   // Speech Recognition ends every few seconds of inactivity
   // but we want to keep it alive while the user is on the page
-  recognition.start();
+  if (autorestart) {
+    recognition.start();
+  }
 };
-},{"/src/logic/elements":"src/logic/elements.js"}],"src/main.js":[function(require,module,exports) {
+
+var setErrorState = function setErrorState() {
+  autorestart = false;
+  _elements2.xIcon.style.display = 'block';
+  _elements2.checkIcon.style.display = 'none';
+  _elements2.textContainer.style.display = 'none';
+  _elements2.settingsButton.style.display = 'none';
+  _elements2.warningWrapper.style.display = 'block';
+};
+
+recognition.onerror = function (e) {
+  switch (e.error) {
+    case 'no-speech':
+      break;
+
+    case 'not-allowed':
+    case 'service-not-allowed':
+      setErrorState();
+      _elements.warningText.textContent = 'Stream CC needs permission to access your microphone. Please enable microphone access and reload this page.';
+      break;
+
+    default:
+      setErrorState();
+      _elements.warningText.textContent = e.error;
+  }
+};
+},{"./elements":"src/logic/elements.js","/src/logic/elements":"src/logic/elements.js"}],"src/main.js":[function(require,module,exports) {
 "use strict";
 
 var _speech = require("/src/logic/speech");
@@ -289,8 +328,7 @@ var _elements = require("/src/logic/elements");
 
 if (_speech.recognition.error) {
   console.warn(_speech.recognition.error);
-  _elements.text.textContent = _speech.recognition.error;
-  _elements.pageSizeWarningText.textContent = _speech.recognition.error;
+  _elements.warningText.textContent = _speech.recognition.error;
 } else {
   _speech.recognition.start();
 }
