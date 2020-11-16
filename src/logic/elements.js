@@ -14,6 +14,7 @@ export const settingsForm = document.getElementById('settingsForm')
 
 export const xIcon = document.querySelector('.xIcon')
 export const checkIcon = document.querySelector('.checkIcon')
+export const exclamationIcon = document.querySelector('.exclamationIcon')
 // END - ELEMENTS - END
 
 // START - UTILS - START

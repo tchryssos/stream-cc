@@ -1,3 +1,5 @@
+import throttle from 'lodash.throttle'
+
 import { warningText } from './elements'
 import {
 	text,
@@ -8,6 +10,7 @@ import {
 	warningWrapper,
 	settingsButton,
 	settingsPannel,
+	exclamationIcon,
 } from '/src/logic/elements'
 
 // START - SPEECH RECOG SETUP - START
@@ -20,6 +23,9 @@ const SpeechRecognition =
 
 export let recognition
 let autorestart = true
+let warning = 0
+const warningPulse = 3000
+const keepAlivePulse = 1000
 
 const setErrorState = (allowRestart) => {
 	autorestart = !!allowRestart
@@ -31,15 +37,28 @@ const setErrorState = (allowRestart) => {
 	settingsPannel.style.display = 'none'
 }
 
+const setWarningState = () => {
+	checkIcon.style.display = 'none'
+	exclamationIcon.style.display = 'block'
+	warning = Date.now()
+}
+
 if (typeof SpeechRecognition === 'undefined') {
 	recognition = { start: () => {} }
 	setErrorState()
 	warningText.textContent =
 		'This browser does not support the Speech Recognition API. Please switch to Google Chrome and try again.'
 } else {
+	checkIcon.style.display = 'block'
+	setInterval(() => {
+		if (warning + warningPulse <= Date.now()) {
+			checkIcon.style.display = 'block'
+			exclamationIcon.style.display = 'none'
+		}
+	}, warningPulse)
 	recognition = new SpeechRecognition()
 }
-// END - SPEECH RECOG SETUP- END
+// END - SPEECH RECOG SETUP - END
 
 // START - SPEECH RECOG CONIG - START
 recognition.continuous = true
@@ -53,13 +72,14 @@ recognition.onresult = (e) => {
 	textWrapper.scroll(0, textWrapper.scrollHeight)
 }
 
-recognition.onend = () => {
+const onEnd = throttle(() => {
 	// Speech Recognition ends every few seconds of inactivity
 	// but we want to keep it alive while the user is on the page
 	if (autorestart) {
 		recognition.start()
 	}
-}
+}, keepAlivePulse)
+recognition.onend = onEnd
 
 recognition.onerror = (e) => {
 	switch (e.error) {
@@ -72,13 +92,13 @@ recognition.onerror = (e) => {
 				'Stream CC needs permission to access your microphone. Please enable microphone access and reload this page.'
 			break
 		case 'network':
-			// @TODO Networking error should lead to a reconnect once network connection is detected
-			setErrorState()
-			warningText.textContent =
-				'Stream CC cannot connect to the internet. Please check your connection and reload the page.'
-			break
 		default:
-			console.warn(`${e.error}. You can report this error with reproduction steps to https://github.com/tchryssos/stream-cc/issues`)
+			setWarningState()
+			console.warn(
+				`${e.error}${
+					e.message ? `: ${e.message}` : ''
+				}. You can report this error with reproduction steps to https://github.com/tchryssos/stream-cc/issues`,
+			)
 	}
 }
 // END - SPEECH RECOG CONFIG - END

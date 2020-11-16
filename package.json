@@ -23,5 +23,8 @@
     "eslint": "^7.13.0",
     "eslint-plugin-import": "^2.22.1",
     "parcel-bundler": "^1.12.4"
+  },
+  "dependencies": {
+    "lodash.throttle": "^4.1.1"
   }
 }

@@ -130,7 +130,10 @@ label {
 
 .xIcon {
 	fill: #de5340;
-	display: none;
+}
+
+.exclamationIcon {
+	fill: #f5bc02;
 }
 
 @keyframes statusPulse {
@@ -142,6 +145,7 @@ label {
 	}
 }
 .statusIcon {
+	display: none;
 	animation: statusPulse 0.8s infinite alternate linear;
 }
 /* END - MENU - END */
