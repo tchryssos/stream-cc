@@ -23,6 +23,7 @@ The most likely reason for captioning your stream with this tool is accessibilit
 
 ## TODOs
 
+- Provide warning feedback outside of console (with tooltips?)
 - Allow text clearing after a timeout (i.e. if I stop speaking for 5 seconds, my captions clear)
 - Investigate modifying Stream CC's i/o so that it is capturable by OBS's `browser` source.
 
